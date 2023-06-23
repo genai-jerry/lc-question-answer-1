@@ -26,8 +26,7 @@ def get_response(prompt, type=1):
         max_tokens=150,
         top_p=1,
         frequency_penalty=0.0,
-        presence_penalty=0.6,
-        stop=["\n", " Human:", " AI:"]
+        presence_penalty=0.6
     )
     return response
 
@@ -38,12 +37,9 @@ def get_choices(response):
     # return the text of the first choice
     return choices[0]['text']
 
-# read the API key from the environment variable
-var = input("Please enter your openAI key: ")
-openai.api_key = var
-print(openai.api_key)
+# read the API key from the environment
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
-var = input("Please enter something: ")
+var = input("Please enter prompt: ")
 response = get_response(var, 1)
 print(get_choices(response))
-print(response)
